@@ -17,10 +17,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 # Application configurations
 app = Flask(__name__)
 app.debug = True
-app.config['SECRET_KEY'] = 'hardtoguessstringfromsi364thisisnotsupersecure'
-## TODO SI364: Create a database in postgresql in the code line below, and fill in your app's database URI. It should be of the format: postgresql://localhost/YOUR_DATABASE_NAME
+app.config['SECRET_KEY'] = 'hardtoguessstringfromsi364'
 
-## Your Postgres database should be your uniqname, plus HW4, e.g. "jczettaHW4" or "maupandeHW4"
 app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://localhost/twitter_sample_ex"
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -98,17 +96,8 @@ class TweetForm(FlaskForm):
 
 
 ##### Helper functions
-
 ### For database additions / get_or_create functions
-
-## TODO SI364: Write get_or_create functions for each model -- Tweets, Hashtags, and Users.
-## -- Tweets should be identified by their text and user id,(e.g. if there's already a tweet with that text, by that user, then return it; otherwise, create it)
-## -- Users should be identified by their username (e.g. if there's already a user with that username, return it, otherwise; create it)
-## -- Hashtags should be identified by their text (e.g. if there's already a hashtag with that text, return it; otherwise, create it)
-
-## HINT: Your get_or_create_tweet function should invoke your get_or_create_user function AND your get_or_create_hashtag function. You'll have seen an example similar to this in class!
-
-## NOTE: If you choose to organize your code differently so it has the same effect of not encounting duplicates / identity errors, that is OK. But writing separate functions that may invoke one another is our primary suggestion.
+# (Some of this code written by Julia Locke. Thanks, Julia!)
 
 def get_or_create_tweet(db_session, tweet_text, username, hashtag_list=[]):
     user = get_or_create_user(db_session, username)
