@@ -1,7 +1,7 @@
 
 <ul>
 {% for tw in all_tweets %}
-<li>{{ tw[0] }}<br><i>posted by</i> <strong>@{{ sg[1] }}</strong></li><br><br>
+<li>{{ tw[0] }} {% for hash in tw[1] %} #{{ hash.text }} {% endfor %}<br><i>posted by</i> <strong>@{{ tw[2] }}</strong></li><br><br>
 {% endfor %}
 </ul>
 

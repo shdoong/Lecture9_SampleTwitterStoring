@@ -6,8 +6,9 @@
 
 <form method="POST">
 	{{ form.hidden_tag() }}
-	{{ form.text.label }} {{ form.text() }}
-	{{ form.username.label }} {{ form.username() }}
+	{{ form.text.label }} {{ form.text() }}<br>
+    {{ form.hashtags.label }} {{ form.hashtags() }}<br>
+	{{ form.username.label }} {{ form.username() }}<br>
 	{{ form.submit() }}
 </form>
 
