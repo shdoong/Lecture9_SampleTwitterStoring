@@ -19,7 +19,7 @@ app = Flask(__name__)
 app.debug = True
 app.config['SECRET_KEY'] = 'hardtoguessstringfromsi364'
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://localhost/twitter_sample_ex"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:Peijia.14@localhost:5432/Lecture9"
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -61,7 +61,7 @@ class Tweet(db.Model):
 ## -- user_id (Integer, ID of user posted)
 
 # User model
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     twitter_username = db.Column(db.String(64), unique=True)
@@ -69,6 +69,17 @@ class User(db.Model):
 
     def __repr__(self):
         return "{} (ID: {})".format(self.twitter_username, self.id)
+        
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
 # - User
 ## -- id (Primary Key)
 ## -- twitter_username (String, up to 64 chars) (Unique=True)
